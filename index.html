@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TW Admin Dashboard</title>
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        #card1 {
+            border-left: 7px solid #246dec;
+        }
+
+        #card2 {
+            border-left: 7px solid #f5b74f;
+        }
+
+        #card3 {
+            border-left: 7px solid #367952;
+        }
+
+        #card4 {
+            border-left: 7px solid #cc3c43;
+        }
+
+        .material-icons-outlined {
+            vertical-align: middle;
+            line-height: 1px;
+          }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="w-1/5 bg-gray-800 text-white p-4">
+            <div class="flex items-center justify-center h-16">
+                <h1 class="text-lg font-semibold"><a href="./index.html"> Admin</a></h1>
+            </div>
+            <ul>
+                <li class="px-4 py-2 hover:bg-gray-700">
+                    <a href="./index.html">Overview</a>
+                </li>
+                <li class="px-4 py-2 hover:bg-gray-700">
+                    <a href="./productlist.html">Products</a>
+                </li>
+                <li class="px-4 py-2 hover:bg-gray-700">
+                    <a href="./report.html">Reports</a>
+                </li>
+                <li class="px-4 py-2 hover:bg-gray-700">
+                    <a href="./brands.html">Brands</a>
+                </li>
+                <li class="px-4 py-2 hover:bg-gray-700">
+                    <a href="./calendar.html">Calendar</a>
+                </li>
+                <li class="px-4 py-2 hover:bg-gray-700">
+                    <a href="./settings.html">Settings</a>
+                </li>
+                <li class="px-4 py-2 hover:bg-gray-700">
+                    <a href="./signin.html">Logout</a>
+                </li>
+                
+            </ul>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            <!-- Header -->
+            <div class="bg-white shadow p-4 flex justify-between items-center">
+                <h2 class="text-2xl font-semibold">Overview</h2>
+                <div class="flex -space-x-1 overflow-hidden"><a href="./team.html" target="_blank">
+                    <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="employees">
+                    <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="employees">
+                    <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt="employees">
+                    <img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="employees">
+                </a>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-4">
+                <!-- Statistics Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                    <!-- Card 1 -->
+                    <div class="bg-white p-4 rounded-lg shadow hover:bg-gray-300 cursor-pointer shadow-2xl" id="card1">
+                        <h4 class="font-semibold text-lg">Sales</h4>
+                        <p>$15,000</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white p-4 rounded-lg shadow hover:bg-gray-300 cursor-pointer shadow-2xl" id="card2">
+                        <h4 class="font-semibold text-lg">Active Users</h4>
+                        <p id="userCount">Loading...</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white p-4 rounded-lg shadow hover:bg-gray-300 cursor-pointer shadow-2xl" id="card3">
+                        <h4 class="font-semibold text-lg">Orders</h4>
+                        <p>1,320</p>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-white p-4 rounded-lg shadow hover:bg-gray-300 cursor-pointer shadow-2xl" id="card4">
+                        <h4 class="font-semibold text-lg">Growth</h4>
+                        <p>3.4%</p>
+                    </div>
+                </div>
+
+                <!-- New Report Form -->
+                <div class="bg-white p-4 rounded-lg shadow mb-4">
+                    <h4 class="font-semibold text-lg mb-2">Create New Report</h4>
+                    <form id="newReportForm">
+                        <input type="text" id="reportName" placeholder="Report Name" class="border p-2 rounded mr-2">
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Create
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Chart Container -->
+                <div class="bg-white p-4 rounded-lg shadow mb-4">
+                    <h4 class="font-semibold text-lg mb-2">Yearly Sales</h4>
+                    <canvas id="salesChart" class="h-64"></canvas>
+                </div>
+
+                
+
+                <!-- Table -->
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h4 class="font-semibold text-lg mb-2">Recent Orders</h4>
+                    <table class="min-w-full">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="text-left py-2 px-4">Order ID</th>
+                                <th class="text-left py-2 px-4">Product</th>
+                                <th class="text-left py-2 px-4">Amount</th>
+                                <th class="text-left py-2 px-4">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-4">12345</td>
+                                <td class="py-2 px-4">Widget A</td>
+                                <td class="py-2 px-4">$200.00</td>
+                                <td class="py-2 px-4">2021-08-01</td>
+                            </tr>
+                            <!-- More rows... -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+<!-- component -->
+<div class="fixed bottom-0 right-0 mb-4 mr-4">
+    <button id="open-chat" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        Chat with Admin Bot
+    </button>
+</div>
+<div id="chat-container" class="hidden fixed bottom-16 right-4 w-96">
+    <div class="bg-white shadow-md rounded-lg max-w-lg w-full">
+        <div class="p-4 border-b bg-blue-500 text-white rounded-t-lg flex justify-between items-center">
+            <p class="text-lg font-semibold"><img class="inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="employees"> Admin Bot</p>
+            <button id="close-chat" class="text-gray-300 hover:text-gray-400 focus:outline-none focus:text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="chatbox" class="p-4 h-80 overflow-y-auto">
+          <!-- Chat messages will be displayed here -->
+          <div class="mb-2 text-right">
+            <p class="bg-blue-500 text-white rounded-lg py-2 px-4 inline-block">hello</p>
+          </div>
+          <div class="mb-2">
+            <p class="bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">This is a response from the chatbot.</p>
+          </div>
+          <div class="mb-2 text-right">
+            <p class="bg-blue-500 text-white rounded-lg py-2 px-4 inline-block">this example of chat</p>
+          </div>
+          <div class="mb-2">
+            <p class="bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">This is a response from the chatbot.</p>
+          </div>
+          <div class="mb-2 text-right">
+            <p class="bg-blue-500 text-white rounded-lg py-2 px-4 inline-block">design with tailwind</p>
+          </div>
+          <div class="mb-2">
+            <p class="bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">This is a response from the chatbot.</p>
+          </div>
+        </div>
+        <div class="p-4 border-t flex">
+            <input id="user-input" type="text" placeholder="Type a message" class="w-full px-3 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button id="send-button" class="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600 transition duration-300">Send</button>
+        </div>
+    </div>
+</div>
+<script>
+    const chatbox = document.getElementById("chatbox");
+const chatContainer = document.getElementById("chat-container");
+const userInput = document.getElementById("user-input");
+const sendButton = document.getElementById("send-button");
+const openChatButton = document.getElementById("open-chat");
+const closeChatButton = document.getElementById("close-chat");
+
+let isChatboxOpen = true; // Set the initial state to open
+
+// Function to toggle the chatbox visibility
+function toggleChatbox() {
+chatContainer.classList.toggle("hidden");
+isChatboxOpen = !isChatboxOpen; // Toggle the state
+}
+
+// Add an event listener to the open chat button
+openChatButton.addEventListener("click", toggleChatbox);
+
+// Add an event listener to the close chat button
+closeChatButton.addEventListener("click", toggleChatbox);
+
+// Add an event listener to the send button
+sendButton.addEventListener("click", function () {
+const userMessage = userInput.value;
+if (userMessage.trim() !== "") {
+    addUserMessage(userMessage);
+    respondToUser(userMessage);
+    userInput.value = "";
+}
+});
+
+userInput.addEventListener("keyup", function (event) {
+if (event.key === "Enter") {
+    const userMessage = userInput.value;
+    addUserMessage(userMessage);
+    respondToUser(userMessage);
+    userInput.value = "";
+}
+});
+
+function addUserMessage(message) {
+const messageElement = document.createElement("div");
+messageElement.classList.add("mb-2", "text-right");
+messageElement.innerHTML = `<p class="bg-blue-500 text-white rounded-lg py-2 px-4 inline-block">${message}</p>`;
+chatbox.appendChild(messageElement);
+chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+function addBotMessage(message) {
+const messageElement = document.createElement("div");
+messageElement.classList.add("mb-2");
+messageElement.innerHTML = `<p class="bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">${message}</p>`;
+chatbox.appendChild(messageElement);
+chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+function respondToUser(userMessage) {
+// Replace this with your chatbot logic
+setTimeout(() => {
+    addBotMessage("This is a response from the chatbot.");
+}, 500);
+}
+
+// Automatically open the chatbox on page load
+toggleChatbox();
+
+    </script>
+
+    </div>
+
+    <script>
+        let salesChart; // 全局变量来存储图表实例
+
+        // Mock 数据更新
+        function createSalesChartData() {
+            // let n = Math.floor(Math.random() * 10000);
+            // console.log("updateData->"+n);
+            // document.getElementById('userCount').innerText = 'Users: ' + n;
+            return Array.from({ length: 6 }, () => Math.floor(Math.random() * 20000));
+        }
+
+        // 初始化图表
+        function initChart(salesData) {
+            
+            const ctx = document.getElementById('salesChart').getContext('2d');
+
+            // 销毁已存在的图表实例
+            if (salesChart) {
+                salesChart.destroy();
+            }
+
+            // 创建新的图表实例
+            salesChart = new Chart(document.getElementById('salesChart'), {
+                type: 'bar',
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                    datasets: [{
+                        label: 'Sales',
+                        data: salesData,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        
+
+        // 处理新报告的创建
+        document.getElementById('newReportForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const reportName = document.getElementById('reportName').value;
+            if (reportName) {
+                // 在这里处理报告的创建逻辑
+                // 例如，保存到 localStorage
+                localStorage.setItem('newReport', reportName);
+                alert('New report created: ' + reportName);
+                document.getElementById('reportName').value = ''; // 清空输入框
+            }
+        });
+
+        // 模拟数据的加载和更新
+        function loadData() {
+            const storedUsers = localStorage.getItem('userCount');
+            const users = storedUsers ? parseInt(storedUsers) : Math.floor(Math.random() * 10000);
+            document.getElementById('userCount').innerText = 'Users: ' + users;
+
+            const storedSalesData = localStorage.getItem('salesData');
+            const salesData = storedSalesData ? JSON.parse(storedSalesData) : createSalesChartData();
+            initChart(salesData);
+        }
+
+        // 定期更新数据
+        setInterval(() => {
+            const newSalesData = createSalesChartData();
+            localStorage.setItem('salesData', JSON.stringify(newSalesData));
+            initChart(newSalesData);
+
+            const newUserCount = Math.floor(Math.random() * 10000);
+            console.log("new userCount="+newUserCount);
+
+            localStorage.setItem('userCount', newUserCount);
+            let uc = document.getElementById('userCount');
+            console.log("Element userCount ->"+uc);
+            console.log("the content is ->"+'Users: ' + newUserCount);
+            uc.innerText = 'Users: ' + newUserCount;
+        }, 5000);
+
+        // 页面加载时加载数据
+        document.addEventListener('DOMContentLoaded', loadData);
+
+        // // 加载数据并更新图表
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     const salesData = updateData();
+        //     initChart(salesData);
+
+        //     每隔5秒更新用户数据
+        //     setInterval(() => {
+        //         updateData();
+        //     }, 5000);
+        // });
+    </script>
+</body>
+
+</html>
